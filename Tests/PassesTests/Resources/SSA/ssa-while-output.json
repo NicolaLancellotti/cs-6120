@@ -1,0 +1,140 @@
+{
+  "functions": [
+    {
+      "args": [
+        {
+          "name": "a",
+          "type": "int"
+        }
+      ],
+      "instrs": [
+        {
+          "label": "entry1"
+        },
+        {
+          "labels": [
+            "while.cond"
+          ],
+          "op": "jmp"
+        },
+        {
+          "label": "while.cond"
+        },
+        {
+          "args": [
+            "__undefined",
+            "zero.1"
+          ],
+          "dest": "zero.0",
+          "labels": [
+            "entry1",
+            "while.body"
+          ],
+          "op": "phi",
+          "type": "int"
+        },
+        {
+          "args": [
+            "__undefined",
+            "one.1"
+          ],
+          "dest": "one.0",
+          "labels": [
+            "entry1",
+            "while.body"
+          ],
+          "op": "phi",
+          "type": "int"
+        },
+        {
+          "args": [
+            "__undefined",
+            "is_term.1"
+          ],
+          "dest": "is_term.0",
+          "labels": [
+            "entry1",
+            "while.body"
+          ],
+          "op": "phi",
+          "type": "bool"
+        },
+        {
+          "args": [
+            "a",
+            "a.1"
+          ],
+          "dest": "a.0",
+          "labels": [
+            "entry1",
+            "while.body"
+          ],
+          "op": "phi",
+          "type": "int"
+        },
+        {
+          "dest": "zero.1",
+          "op": "const",
+          "type": "int",
+          "value": 0
+        },
+        {
+          "args": [
+            "a.0",
+            "zero.1"
+          ],
+          "dest": "is_term.1",
+          "op": "eq",
+          "type": "bool"
+        },
+        {
+          "args": [
+            "is_term.1"
+          ],
+          "labels": [
+            "while.finish",
+            "while.body"
+          ],
+          "op": "br"
+        },
+        {
+          "label": "while.body"
+        },
+        {
+          "dest": "one.1",
+          "op": "const",
+          "type": "int",
+          "value": 1
+        },
+        {
+          "args": [
+            "a.0",
+            "one.1"
+          ],
+          "dest": "a.1",
+          "op": "sub",
+          "type": "int"
+        },
+        {
+          "labels": [
+            "while.cond"
+          ],
+          "op": "jmp"
+        },
+        {
+          "label": "while.finish"
+        },
+        {
+          "args": [
+            "a.0"
+          ],
+          "op": "print"
+        },
+        {
+          "op": "ret"
+        }
+      ],
+      "name": "main"
+    }
+  ]
+}

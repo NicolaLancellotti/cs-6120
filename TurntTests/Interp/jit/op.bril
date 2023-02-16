@@ -1,0 +1,53 @@
+# CMD: bril2json < {filename} | swift run driver interp --jit-func op --jit-static-argname bit1 --jit-static-argname bit0 --jit-verbose
+
+# 0 0 sum
+# 0 1 sub
+# 1 0 mul
+# 1 1 div
+
+@op(lhs: int, bit1: bool, bit0: bool, rhs: int): int {
+  br bit1 .bit1_true .bit1_false;
+.bit1_true:
+  
+  br bit0 .bit1_true_bit0_true .bit1_true_bit0_false;
+.bit1_true_bit0_true:
+  value: int = div lhs rhs;
+  ret value;
+.bit1_true_bit0_false:  
+  value: int = mul lhs rhs;
+  ret value;
+
+.bit1_false:
+
+  br bit0 .bit1_false_bit0_true .bit1_false_bit0_false;
+.bit1_false_bit0_true:
+  value: int = sub lhs rhs;
+  ret value;
+.bit1_false_bit0_false: 
+  value: int = add lhs rhs;
+  ret value;
+}
+
+@main {
+  x: int = const 1;
+  
+  true: bool = const true;
+  false: bool = const false;
+
+  value: bool = call @op x false false x;
+  value: bool = call @op x false true x;
+  value: bool = call @op x true false x;
+  value: bool = call @op x true true x;
+
+  lhs: int = const 15;
+  rhs: int = const 5;
+  
+  value: bool = call @op lhs false false rhs;
+  print value; # 20
+  value: bool = call @op lhs false true rhs;
+  print value; # 10
+  value: bool = call @op lhs true false rhs;
+  print value; # 75
+  value: bool = call @op lhs true true rhs;
+  print value; # 3
+}

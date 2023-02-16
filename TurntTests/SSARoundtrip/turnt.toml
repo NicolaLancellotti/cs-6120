@@ -1,0 +1,1 @@
+command = "bril2json < {filename} | swift run driver ssa to_ssa | swift run driver ssa from_ssa | swift run driver dce | brili {args}"

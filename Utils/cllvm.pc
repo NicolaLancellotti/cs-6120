@@ -1,0 +1,5 @@
+Name: cllvm
+Description: LLVM
+Version: 17
+Libs: -L/usr/lib/llvm-17/lib  -lLLVM-17
+Cflags: -I/usr/lib/llvm-17/include

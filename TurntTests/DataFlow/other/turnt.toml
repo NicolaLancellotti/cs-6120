@@ -1,0 +1,15 @@
+[envs.defined]
+command = "bril2json < {filename} | swift run driver df defined"
+output."defined.out" = "-"
+
+[envs.live]
+command = "bril2json < {filename} | swift run driver df live"
+output."live.out" = "-"
+
+[envs.cprop]
+command = "bril2json < {filename} | swift run driver df cprop"
+output."cprop.out" = "-"
+
+[envs.expr]
+command = "bril2json < {filename} | swift run driver df expr"
+output."expr.out" = "-"

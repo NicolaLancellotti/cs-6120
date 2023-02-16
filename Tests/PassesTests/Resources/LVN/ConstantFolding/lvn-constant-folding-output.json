@@ -1,0 +1,21 @@
+{
+  "functions": [
+    {
+      "instrs": [
+        {
+          "dest": "prod1",
+          "op": "const",
+          "type": "int",
+          "value": 36
+        },
+        {
+          "args": [
+            "prod1"
+          ],
+          "op": "print"
+        }
+      ],
+      "name": "main"
+    }
+  ]
+}

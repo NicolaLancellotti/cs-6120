@@ -1,0 +1,55 @@
+{
+  "functions": [
+    {
+      "name": "main",
+      "args": [],
+      "instrs": [
+        {
+          "dest": "a",
+          "op": "const",
+          "value": 4,
+          "type": "int"
+        },
+        {
+          "dest": "b",
+          "op": "const",
+          "value": 2,
+          "type": "int"
+        },
+        {
+          "dest": "sum1",
+          "op": "add",
+          "args": [
+            "a",
+            "b"
+          ],
+          "type": "int"
+        },
+        {
+          "dest": "sum2",
+          "op": "add",
+          "args": [
+            "b",
+            "a"
+          ],
+          "type": "int"
+        },
+        {
+          "dest": "prod",
+          "op": "mul",
+          "args": [
+            "sum1",
+            "sum2"
+          ],
+          "type": "int"
+        },
+        {
+          "op": "print",
+          "args": [
+            "prod"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "functions": [
+    {
+      "instrs": [
+        {
+          "dest": "x",
+          "op": "const",
+          "type": "int",
+          "value": 4
+        },
+        {
+          "labels": [
+            "label"
+          ],
+          "op": "jmp"
+        },
+        {
+          "label": "label"
+        },
+        {
+          "args": [
+            "x"
+          ],
+          "dest": "copy1",
+          "op": "id",
+          "type": "int"
+        },
+        {
+          "args": [
+            "x"
+          ],
+          "dest": "copy2",
+          "op": "id",
+          "type": "int"
+        },
+        {
+          "args": [
+            "x"
+          ],
+          "dest": "copy3",
+          "op": "id",
+          "type": "int"
+        },
+        {
+          "args": [
+            "x"
+          ],
+          "op": "print"
+        }
+      ],
+      "name": "main"
+    }
+  ]
+}

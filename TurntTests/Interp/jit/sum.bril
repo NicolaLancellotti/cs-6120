@@ -1,0 +1,74 @@
+# CMD: bril2json < {filename} | swift run driver interp --jit-func sum --jit-static-argname count --jit-verbose
+
+@sum_natural_numebers(count: int): int {
+  one: int = const 1;
+  two: int = const 2;
+
+  value: int = sub count one;
+  value: int = mul value count;
+  value: int = div value two;
+  ret value;
+}
+
+@range(count: int): ptr<int> {
+  vector: ptr<int> = alloc count;
+  
+  one: int = const 1;
+  index: int = const 0;
+.start:
+  p: ptr<int> = ptradd vector index;
+  store p index;
+  index: int = add index one;
+
+  flag: bool = lt index count;
+  br flag .start .end;
+.end: 
+  ret vector;
+}
+
+@sum(vector: ptr<int>, count: int): int {
+  sum: int = const 0;  
+  
+  one: int = const 1;
+  index: int = const 0;
+.start:
+  pointer: ptr<int> = ptradd vector index;
+  value: int = load pointer;
+  sum: int = add sum value;
+  index: int = add index one;
+
+  flag: bool = lt index count;
+  br flag .start .end;
+.end: 
+  ret sum;
+}
+
+@test(count: int) {
+  vector: ptr<int> = call @range count;
+  sum: int = call @sum vector count;
+
+  expected: int = call @sum_natural_numebers count;
+  equal: bool = eq sum expected;
+  br equal .success .failure;
+.success:
+    print sum;
+    ret;
+.failure:
+    error: int = const -1;
+    print error;
+    ret;
+}
+
+@main {
+  count_0: int = const 1000;
+  count_1: int = const 100000;
+  
+  call @test count_0;
+  call @test count_1;
+  
+  call @test count_0;
+  call @test count_1;
+
+  call @test count_0;
+  call @test count_1;
+}

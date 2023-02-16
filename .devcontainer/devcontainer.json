@@ -1,0 +1,22 @@
+{
+    "name": "Swift",
+    "image": "${localWorkspaceFolderBasename}",
+    "runArgs": [
+        "--cap-add=SYS_PTRACE"
+     ],
+     "workspaceMount": "type=bind,src=${localWorkspaceFolder},target=/${localWorkspaceFolderBasename}",
+     "workspaceFolder": "/${localWorkspaceFolderBasename}",
+     "customizations": {
+		"vscode": {
+			"extensions": [
+				"sswg.swift-lang",
+				"vadimcn.vscode-lldb",
+				"ms-vscode.cpptools-extension-pack"
+			],
+            "settings": {
+                "lldb.library": "/usr/lib/liblldb.so",
+                "lldb.launch.expressions": "native"
+            }
+          }
+     }
+}

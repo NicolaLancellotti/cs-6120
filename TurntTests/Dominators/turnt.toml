@@ -1,0 +1,11 @@
+[envs.dom]
+command = "bril2json < {filename} | swift run driver df dom"
+output."dom.json" = "-"
+
+[envs.front]
+command = "bril2json < {filename} | swift run driver dom front"
+output."front.json" = "-"
+
+[envs.tree]
+command = "bril2json < {filename} | swift run driver dom tree"
+output."tree.json" = "-"

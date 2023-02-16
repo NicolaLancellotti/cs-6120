@@ -1,0 +1,22 @@
+{
+    "configurations": [
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug driver",
+            "program": "${workspaceFolder:cs-6120}/.build/debug/driver",
+            "args": [],
+            "cwd": "${workspaceFolder:cs-6120}",
+            "preLaunchTask": "swift: Build Debug driver"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Release driver",
+            "program": "${workspaceFolder:cs-6120}/.build/release/driver",
+            "args": [],
+            "cwd": "${workspaceFolder:cs-6120}",
+            "preLaunchTask": "swift: Build Release driver"
+        }
+    ]
+}

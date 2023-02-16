@@ -1,0 +1,82 @@
+# CMD: bril2json < {filename} | swift run driver interp --jit-func and --jit-static-argname count --jit-verbose
+
+@intialize_to_true(count: int): ptr<bool> {
+  vector: ptr<bool> = alloc count;
+  
+  true: bool = const true;
+  one: int = const 1;
+  index: int = const 0;
+.start:
+  p: ptr<bool> = ptradd vector index;
+  store p true;
+  index: int = add index one;
+
+  flag: bool = lt index count;
+  br flag .start .end;
+.end: 
+  ret vector;
+}
+
+@and(vector: ptr<bool>, count: int): bool {
+  value: bool = const true;  
+  
+  one: int = const 1;
+  index: int = const 0;
+.start:
+  pointer: ptr<bool> = ptradd vector index;
+  current: bool = load pointer;
+  value: bool = and value current;
+  
+#   br value .not_false .end; # error: `br` argument must be static during tracing
+# .not_false:
+
+  index: int = add index one;
+  flag: bool = lt index count;
+  br flag .start .end;
+.end: 
+  ret value;
+}
+
+@and_primitive(x: bool, y: bool): bool {
+  value: bool = and x y;
+  ret value;
+}
+
+@main {
+  false: bool = const false;
+  zero: int = const 0;
+  one: int = const 1;
+  two: int = const 2;
+  three: int = const 3;
+
+  vector: ptr<bool> = call @intialize_to_true three;
+
+  value: bool = call @and vector zero; # Trace
+  value: bool = call @and vector one; # Trace
+  value: bool = call @and vector two; # Trace
+  value: bool = call @and vector three; # Trace
+
+  
+  value: bool = call @and vector three; # [true, true, true]
+  print value; # JIT true
+ 
+  p: ptr<bool> = ptradd vector two;
+  store p false; # [true, true, false]
+
+  value: bool = call @and vector three; # [true, true, false]
+  print value; # JIT false
+
+  value: bool = call @and vector two; # [true, true]
+  print value; # JIT true
+
+  store vector false; # [false, true]
+  value: bool = call @and vector two; # [true, true]
+  print value; # JIT false
+
+  vector: ptr<bool> = ptradd vector one; # [true]
+  value: bool = call @and vector one; # [true]
+  print value; # JIT true
+
+  value: bool = call @and vector zero; # []
+  print value; # JIT true
+}

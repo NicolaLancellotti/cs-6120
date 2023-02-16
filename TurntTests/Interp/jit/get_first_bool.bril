@@ -1,0 +1,45 @@
+# CMD: bril2json < {filename} | swift run driver interp --jit-func get_first --jit-verbose
+
+@intialize_to_false(count: int): ptr<bool> {
+  vector: ptr<bool> = alloc count;
+  
+  false: bool = const false;
+  one: int = const 1;
+  index: int = const 0;
+.start:
+  p: ptr<bool> = ptradd vector index;
+  store p false;
+  index: int = add index one;
+
+  flag: bool = lt index count;
+  br flag .start .end;
+.end: 
+  ret vector;
+}
+
+@get_first(vector: ptr<bool>): bool {
+  value: bool = load vector; 
+  ret value;
+}
+
+@main {
+  count: int = const 3;
+  one: int = const 1;
+
+  vector: ptr<int> = call @intialize_to_false count;
+  true: int = const true;
+  p: ptr<bool> = ptradd vector one;
+  store p true;
+  # vector = [false, true, false]
+
+  value: bool = call @get_first vector;
+  print value;  
+
+  vector: ptr<bool> = ptradd vector one;
+  value: bool = call @get_first vector;
+  print value;
+
+  vector: ptr<bool> = ptradd vector one;
+  value: bool = call @get_first vector;
+  print value;
+}

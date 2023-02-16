@@ -1,0 +1,16 @@
+@main {
+  x: int = const 1;
+  cond: bool = const false;
+  br cond .body1 .body2;
+
+.body1:
+  y: int = const 1;
+  jmp .end;
+
+.body2:
+  jmp .end;
+
+.end:
+  print x;
+  print y;
+}

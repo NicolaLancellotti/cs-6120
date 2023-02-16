@@ -1,0 +1,12 @@
+b1:
+  in:  ∅
+  out: cond, x
+body1:
+  in:  cond, x
+  out: cond, x, y
+body2:
+  in:  cond, x
+  out: cond, x, y
+end:
+  in:  cond, x, y
+  out: cond, x, y

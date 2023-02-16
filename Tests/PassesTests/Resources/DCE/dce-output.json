@@ -1,0 +1,37 @@
+{
+  "functions": [
+    {
+      "name": "main",
+      "args": [],
+      "instrs": [
+        {
+          "dest": "a",
+          "op": "const",
+          "value": 4,
+          "type": "int"
+        },
+        {
+          "dest": "b",
+          "op": "const",
+          "value": 2,
+          "type": "int"
+        },
+        {
+          "dest": "d",
+          "op": "add",
+          "args": [
+            "a",
+            "b"
+          ],
+          "type": "int"
+        },
+        {
+          "op": "print",
+          "args": [
+            "d"
+          ]
+        }
+      ]
+    }
+  ]
+}

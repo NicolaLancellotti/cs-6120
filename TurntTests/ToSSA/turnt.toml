@@ -1,0 +1,1 @@
+command = "bril2json < {filename} | swift run driver ssa to_ssa | bril2txt"
